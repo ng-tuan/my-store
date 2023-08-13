@@ -1,0 +1,45 @@
+<div class="container mt-5">
+  <div class="row" *ngIf="cart.length > 0; else warningEmptyCart">
+    <div class="col-md-6 d-flex flex-column">
+      <div
+        *ngFor="let cartProduct of cart"
+        class="d-flex justify-content-center align-items-center"
+      >
+        <div class="mb-3">
+          <img
+            src="{{ cartProduct.url }}"
+            alt="..."
+            class="rounded mx-auto d-block"
+            style="width: 60%"
+          />
+        </div>
+        <div style="margin-right: 70px">
+          <h6>{{ cartProduct.name }}</h6>
+          <p>${{ cartProduct.price }}</p>
+          <span
+            >Amount:
+            <input
+              type="number"
+              min="0"
+              max="5"
+              value="{{ cartProduct.amount }}"
+              (change)="selectedChangeAmount($event, cartProduct)"
+          /></span>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <app-user-information
+        (informationUser)="onSubmitCheckout($event)"
+      ></app-user-information>
+    </div>
+    <div class="col-md-2">
+      <h3>Total: {{ totalPrice | currency : "USD" }}</h3>
+    </div>
+  </div>
+</div>
+<ng-template #warningEmptyCart>
+  <div class="warning-message text-center mt-5">
+    Cart is empty! Please <a routerLink="/"> Add product</a>.
+  </div>
+</ng-template>

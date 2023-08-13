@@ -1,0 +1,35 @@
+<div class="card mx-auto" style="width: 20rem">
+  <form (ngSubmit)="addToCart(product)" novalidate>
+    <a routerLink="product/{{ product.id }}">
+      <img
+        [src]="product.url"
+        class="card-img-top"
+        alt="..."
+        style="padding: 10px; cursor: pointer"
+      />
+    </a>
+    <div class="card-body pt-0">
+      <h5 class="card-title text-center mb-1">{{ product.name }}</h5>
+      <p class="card-text text-center mb-1">${{ product.price }}</p>
+      <div class="text-center mb-2">
+        <select
+          class="form-select form-select-sm mx-auto"
+          aria-label="Default select example"
+          [(ngModel)]="amount"
+          (ngModelChange)="updateAmout($event)"
+          [ngModelOptions]="{ standalone: true }"
+          style="width: 35%"
+        >
+          <option *ngFor="let value of selectAmounts" value="{{ value }}">
+            {{ value }}
+          </option>
+        </select>
+      </div>
+      <div class="text-center">
+        <button class="btn btn-primary text-center btn-md" type="submit">
+          Add to card
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

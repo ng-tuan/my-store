@@ -1,0 +1,41 @@
+<div class="container">
+  <form (ngSubmit)="addToCart(product)" novalidate>
+    <div class="row" style="align-items: center">
+      <div class="col-md-6">
+        <img
+          [src]="product.url"
+          alt="..."
+          class="rounded mt-5"
+          style="width: 50%; float: right"
+        />
+      </div>
+      <div class="col-md-6" style="padding: 100px">
+        <h1 class="mb-1">{{ product.name }}</h1>
+        <p class="my-1">${{ product.price }}</p>
+        <p class="my-2 py-2">{{ product.description }}</p>
+        <div class="mb-2">
+          <select
+            class="form-select form-select-sm"
+            aria-label="Default select example"
+            style="width: 35%"
+            [(ngModel)]="amount"
+            (ngChange)="updateAmout($event)"
+            [ngModelOptions]="{ standalone: true }"
+          >
+            <option *ngFor="let value of selectAmounts" value="{{ value }}">
+              {{ value }}
+            </option>
+          </select>
+        </div>
+        <div class="mb-2">
+          <button class="btn btn-primary text-center btn-md">
+            Add to card
+          </button>
+        </div>
+        <a class="back-button" routerLink="/" style="text-decoration: none"
+          >&lt; Back to products list</a
+        >
+      </div>
+    </div>
+  </form>
+</div>
